@@ -1,0 +1,57 @@
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+type Circle struct {
+	Radius float32
+}
+type Square struct {
+	Side float32
+}
+type Rectangle struct {
+	higth, length float32
+}
+
+func (c Circle) Area() float32 {
+	return c.Radius * c.Radius * math.Pi
+}
+
+func (s Square) Area() float32 {
+	return s.Side * s.Side
+}
+
+func (r Rectangle) Area() float32 {
+	return r.higth * r.length
+}
+func (r Rectangle) Perimeter() float32 {
+	return (r.higth + r.length) * 2
+}
+
+type Shape interface {
+	Area() float32
+}
+type ShapeWithPerimeter interface {
+	Perimeter() float32 // metods
+}
+
+func PrintShapeArea(shape Shape) { //func prinimaet interface Shape kak argument
+	fmt.Printf("Area of shape is: %v\n", shape.Area())
+}
+func PrintShapePerimeter(shape ShapeWithPerimeter) { //func prinimaet interface Shape kak argument
+	fmt.Printf("Perimeter of shape is: %v\n", shape.Perimeter())
+}
+
+func main() {
+	circle := Circle{5}
+	square := Square{6}
+	rectangle := Rectangle{4, 9}
+
+	PrintShapeArea(square)
+	PrintShapeArea(circle)
+	PrintShapeArea(rectangle)
+	PrintShapePerimeter(rectangle)
+
+}
